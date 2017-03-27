@@ -1,0 +1,21 @@
+build_pdf:
+  before_script:
+    # Download and install pandoc and kramdown before we begin
+    # pandoc does PDF, but requires pdflatex, which can be a ~500mb download
+    # so we go for kramdown, which handles PDF, but doesn't handle DOCX
+    - apt-get update -y
+    - apt-get install -y pandoc
+    - gem install kramdown
+    - gem install prawn
+    - gem install prawn-table
+  script:
+    # Runs pandoc on all .md files in the repo and outputs them as PDF and DOCX
+    - find . -name '*.md' -exec sh -c 'pandoc $0 -f markdown -t docx -o $0.docx' {} \;
+    - find . -name '*.md' -exec sh -c 'kramdown $0 --output pdf > $0.pdf' {} \;
+  artifacts:
+    # Attach all untracked files (e.g. files that were recently created and not yet committed to git) as artifacts.
+    # These are the files you then download after the job has finished.
+    untracked: true
+  only:
+    # Only run on the master branch
+    - master
