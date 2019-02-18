@@ -6,8 +6,7 @@ build_pdf:
     - apt-get update -y
     - apt-get install -y pandoc
     - gem install kramdown
-    - gem install prawn
-    - gem install prawn-table
+    - gem install kramdown-converter-pdf
   script:
     # Runs pandoc on all .md files in the repo and outputs them as PDF and DOCX
     - find . -name '*.md' -exec sh -c 'pandoc $0 -f markdown -t docx -o $0.docx' {} \;
