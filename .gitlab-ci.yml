@@ -6,6 +6,7 @@ build_pdf:
     - apt-get update -y
     - apt-get install -y pandoc
     - gem install kramdown
+    - gem install kramdown-converter-pdf
     - gem install prawn
     - gem install prawn-table
   script:
