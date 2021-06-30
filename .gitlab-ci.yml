@@ -11,8 +11,8 @@ build_pdf:
     - gem install prawn-table
   script:
     # Runs pandoc on all .md files in the repo and outputs them as PDF and DOCX
-    - find . -name '*.md' -exec sh -c 'pandoc $0 -f markdown -t docx -o $0.docx' {} \;
-    - find . -name '*.md' -exec sh -c 'kramdown $0 --output pdf > $0.pdf' {} \;
+    - find . -name '*.md' -exec sh -c 'pandoc "$0" -f markdown -t docx -o "$0.docx"' {} \;
+    - find . -name '*.md' -exec sh -c 'kramdown "$0" --output pdf > "$0.pdf"' {} \;
   artifacts:
     # Attach all untracked files (e.g. files that were recently created and not yet committed to git) as artifacts.
     # These are the files you then download after the job has finished.
